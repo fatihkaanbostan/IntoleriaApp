@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Intoleria</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--b:#1a3a9b;--bg:#FBF8F3;--l:#E4DED2;--m:#4A5B52;--t:#E6EFE9;--a:#B8641A}
+*{box-sizing:border-box}
+body{margin:0;font-family:'Plus Jakarta Sans',system-ui,sans-serif;background:var(--bg);color:#17231D;line-height:1.5}
+h1,h2,h3{font-family:'Fraunces',Georgia,serif;font-weight:600;margin:0;letter-spacing:-.01em}
+.sub{font-size:13px;color:var(--m)}
+.info{font-size:12px;color:var(--m);margin-top:6px}
+#side{position:fixed;inset:0 auto 0 0;width:230px;background:#fff;border-right:1px solid var(--l);padding:22px 14px;display:flex;flex-direction:column;gap:4px}
+.logo{font-family:'Fraunces',serif;font-size:22px;font-weight:600;color:var(--b);padding:0 10px 18px}
+.logo-img{display:block;height:100px;width:auto;max-width:180px;margin-bottom:10px}
+#side button{display:flex;align-items:center;gap:10px;text-align:left;border:0;background:none;padding:12px 14px;border-radius:12px;font-size:15px;font-weight:500;color:var(--m);cursor:pointer;font-family:inherit;transition:background .2s,color .2s,transform .15s}
+#side button:hover{background:var(--t)}#side button:active{transform:scale(.98)}
+#side button.on{background:var(--t);color:var(--b);font-weight:700}
+.dot{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.5}.on .dot{opacity:1}
+.fn{margin-top:auto;font-size:11.5px;color:#6B7A72;padding:10px}
+main{margin-left:230px;padding:32px 36px 60px;max-width:1100px}
+.view{animation:fade .35s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@keyframes up{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.in{animation:up .55s cubic-bezier(.2,.7,.2,1) both;animation-delay:calc(var(--i,0)*70ms)}
+h2{font-size:28px;margin-bottom:4px}h3{font-size:18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:16px;margin-top:18px}
+.card{background:#fff;border:1px solid var(--l);border-radius:20px;padding:18px;transition:transform .25s,box-shadow .25s}
+.lift{cursor:pointer}.lift:hover{transform:translateY(-4px);box-shadow:0 14px 30px rgba(31,77,58,.12)}
+.hero{background:linear-gradient(135deg,#1a3a9b,#2C6B51);color:#fff;border:0;grid-column:1/-1;display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;padding:26px}
+.hero h2{color:#fff}.hero .sub{color:#CFE0D5}
+.r{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.tag{font-size:11px;font-weight:700;padding:3px 10px;border-radius:99px;white-space:nowrap}
+.ok{background:#DDF0E3;color:#17603A}.warn{background:#FCE9CF;color:#8A4A0B}.no{background:#F8DEDA;color:#8C2A1C}.home{background:#EEE9DE;color:#4A5B52}
+button.p{background:var(--b);color:#fff;border:0;border-radius:99px;min-height:44px;padding:0 22px;font-weight:600;font-size:15px;cursor:pointer;font-family:inherit;transition:transform .15s,background .2s}
+button.p:hover{background:#163A2B}button.p:active,button.s:active{transform:scale(.97)}
+.hero button.p{background:#F3C77E;color:#17231D}
+button.s{background:none;border:1.5px solid var(--b);color:var(--b);border-radius:99px;min-height:36px;padding:0 14px;font-weight:600;font-size:13px;cursor:pointer;font-family:inherit;transition:transform .15s,background .2s}
+button.s:hover{background:var(--t)}
+button.x{background:none;border:0;color:#8C2A1C;font-size:22px;cursor:pointer;min-width:44px;min-height:44px}
+.chip{display:inline-block;border:1.5px solid var(--l);background:#fff;color:var(--m);border-radius:99px;padding:7px 14px;font-size:13px;margin:3px 4px 0 0;cursor:pointer;font-family:inherit;transition:all .2s}
+.chip.on{background:var(--t);border-color:var(--b);color:var(--b);font-weight:600}
+input[type=text],input[type=number],input[type=search],select{width:100%;min-height:44px;border:1.5px solid var(--l);border-radius:12px;padding:0 12px;font-size:15px;font-family:inherit;background:#fff}
+input:focus,select:focus{outline:2px solid var(--a);outline-offset:1px}
+label.c{display:inline-flex;align-items:center;gap:6px;margin-right:14px;font-size:14px;min-height:44px}
+.tile{height:120px;border-radius:14px;margin:-4px -4px 12px;display:flex;align-items:center;justify-content:center;font-size:56px;overflow:hidden;position:relative}
+.bar{height:10px;background:#EEE9DE;border-radius:99px;overflow:hidden}.bar i{display:block;height:100%;background:var(--b);border-radius:99px;transition:width .8s cubic-bezier(.2,.7,.2,1)}.bar.over i{background:#B3341F}
+.ring circle{fill:none;stroke-width:9}.ring .bg{stroke:#EEE9DE}.ring .fg{stroke:var(--b);stroke-linecap:round;transform:rotate(-90deg);transform-origin:50% 50%;transition:stroke-dashoffset 1s cubic-bezier(.2,.7,.2,1)}
+.ph{border:2px dashed #CFC8B8;border-radius:16px;min-height:150px;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;color:var(--m);font-size:13px;background:#fff}
+.vt{aspect-ratio:16/9;border-radius:14px;background:#17231D center/cover;position:relative;margin-bottom:10px;overflow:hidden}
+.vt:after{content:"";position:absolute;left:50%;top:50%;width:54px;height:54px;margin:-27px;border-radius:50%;background:rgba(255,255,255,.92) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%231F4D3A' d='M9 7l9 5-9 5z'/%3E%3C/svg%3E") center/26px no-repeat;transition:transform .25s}
+.lift:hover .vt:after{transform:scale(1.12)}
+.sheet{position:fixed;inset:0;background:rgba(10,25,18,.5);display:flex;align-items:flex-end;justify-content:center;z-index:20;animation:bg .25s ease both}
+@keyframes bg{from{opacity:0}to{opacity:1}}
+.sheet>div{background:var(--bg);width:100%;max-width:620px;max-height:90vh;overflow:auto;border-radius:24px 24px 0 0;padding:22px;animation:sl .35s cubic-bezier(.2,.8,.2,1) both}
+@keyframes sl{from{transform:translateY(40px);opacity:0}to{transform:none;opacity:1}}
+@media(min-width:700px){.sheet{align-items:center}.sheet>div{border-radius:24px}}
+.vf{aspect-ratio:16/9;width:100%;border:0;border-radius:14px;background:#000}
+.toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#17231D;color:#fff;padding:12px 20px;border-radius:99px;font-size:14px;z-index:30;animation:up .3s both}
+.box{background:#fff;border:1px solid var(--l);border-radius:14px;padding:12px;margin-bottom:10px}
+ol.st{padding-left:22px;margin:8px 0 16px}ol.st li{margin-bottom:10px}
+.note{background:#FCE9CF;color:#8A4A0B;border-radius:12px;padding:10px 12px;font-size:12.5px;margin-bottom:12px}
+@media(max-width:860px){#side{inset:auto 0 0 0;width:100%;flex-direction:row;padding:0 0 env(safe-area-inset-bottom);border-right:0;border-top:1px solid var(--l);z-index:10}.logo,.fn{display:none}#side button{flex:1;flex-direction:column;gap:2px;padding:10px 2px;font-size:11.5px;border-radius:0;text-align:center}.dot{display:none}main{margin:0;padding:22px 16px 96px}h2{font-size:24px}.toast{bottom:84px}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<nav id="side" aria-label="Main menu"><div class="logo"><!-- LOGO: put your PNG next to this file as logo.png (or change the src below). It stays hidden until the file exists. --><img class="logo-img" src="logo.png" alt="Intoleria logo" onerror="this.style.display='none'">Intoleria</div>
+<button id="t-home" onclick="tab('home')"><span class="dot"></span>Home</button>
+<button id="t-tarif" onclick="tab('tarif')"><span class="dot"></span>Recipes</button>
+<button id="t-plan" onclick="tab('plan')"><span class="dot"></span>Plan</button>
+<button id="t-liste" onclick="tab('liste')"><span class="dot"></span>List</button>
+<button id="t-video" onclick="tab('video')"><span class="dot"></span>Videos</button>
+<button id="t-hane" onclick="tab('hane')"><span class="dot"></span>Household</button>
+<div class="fn">Product and price data are samples. This is not medical advice; always check the labels.</div></nav>
+<main id="v"></main><div id="m"></div>
+<script>
+// ===== DATA (SAMPLE) =====
+const ING={pirinc:'Rice',mercimek:'Red lentils',tavuk:'Chicken breast',yumurta:'Eggs',makarna:'Pasta',peynir:'White cheese',yogurt:'Yogurt',nohut:'Chickpeas',barbunya:'Borlotti beans',sebze:'Mixed vegetables',zeytinyagi:'Olive oil',sogan:'Onion',havuc:'Carrot',patates:'Potato',domates:'Tomato'};
+// Pack size: [amount, unit]. The shopping list rounds recipe amounts up to these packs.
+const PK={pirinc:[1000,'g'],mercimek:[1000,'g'],tavuk:[1000,'g'],yumurta:[10,'pcs'],makarna:[500,'g'],peynir:[500,'g'],yogurt:[1000,'g'],nohut:[1000,'g'],barbunya:[1000,'g'],sebze:[450,'g'],zeytinyagi:[1000,'ml'],sogan:[1000,'g'],havuc:[1000,'g'],patates:[1000,'g'],domates:[1000,'g']};
+// All product data is SAMPLE data. When you switch to real data, update the SRC text and the LB.ok label.
+const SRC='Source: sample data · Last checked: none';
+// [ingredient, name, gluten, lactose, pack price, cross-contamination, ingredients list]
+// gluten/lactose: f=free c=contains u=no info · cross-contamination: ''=no info, rg=trace gluten risk, rl=trace milk risk
+const P=[
+['pirinc','Rice · Brand A','f','f',55,'','Rice'],
+['pirinc','Rice · Brand B','u','f',42,'rg','Rice; may be processed in the same facility as gluten-containing products'],
+['mercimek','Lentils · Brand A','f','f',48,'','Red lentils'],
+['mercimek','Lentils · Brand B','u','f',36,'','Red lentils; gluten status not stated'],
+['tavuk','Chicken breast · Brand A','f','f',140,'','Chicken breast'],
+['tavuk','Marinated chicken · Brand B','c','f',120,'','Chicken, wheat-containing marinade'],
+['yumurta','Eggs 10 pcs · Brand A','f','f',70,'','Eggs'],
+['makarna','Pasta · Brand A','c','f',30,'','Durum wheat semolina'],
+['makarna','Gluten-free pasta · Brand B','f','f',85,'','Corn flour, rice flour'],
+['makarna','Gluten-free pasta · Brand C','u','f',65,'','Corn flour; gluten-free claim not verified'],
+['peynir','White cheese · Brand A','f','c',110,'','Milk, salt, rennet'],
+['peynir','Lactose-free cheese · Brand B','f','f',150,'','Lactose-free milk, salt, rennet'],
+['peynir','White cheese · Brand C','u','c',95,'','Milk, salt; no gluten info'],
+['yogurt','Yogurt · Brand A','f','c',60,'','Milk, yogurt culture'],
+['yogurt','Lactose-free yogurt · Brand B','f','f',85,'','Lactose-free milk, yogurt culture'],
+['nohut','Chickpeas · Brand A','f','f',50,'','Chickpeas'],
+['nohut','Chickpeas · Brand B','u','f',38,'','Chickpeas; gluten status not stated'],
+['barbunya','Borlotti beans · Brand A','f','f',58,'','Borlotti beans'],
+['sebze','Frozen vegetables · Brand A','u','f',45,'','Vegetable mix; no sauce/additive info'],
+['sebze','Frozen vegetables · Brand B','f','f',60,'','Carrot, peas, corn'],
+['zeytinyagi','Olive oil · Brand A','f','f',320,'','Olive oil'],
+['patates','Potato · Brand A','f','f',30,'','Potato'],
+['havuc','Carrot · Brand A','f','f',25,'','Carrot'],
+['domates','Tomato · Brand A','f','f',45,'','Tomato'],
+['sogan','Onion · Brand A','f','f',20,'','Onion']];
+// ===== RECIPES =====
+// R(name, servings, minutes, emoji, description, [[ingredient, amount(g/ml/pcs), 'written measure']], [steps], 'extra ingredients', 'YouTube link/ID', 'image URL (optional)')
+const RC=[];
+function R(n,s,m,em,d,am,st,ex,vid,img){RC.push([n,am.map(a=>a[0]),d,m,s,am,st,ex,vid||'',img||'',em])}
+R('Lentil soup',4,35,'🍲','Classic, thick red lentil soup.',
+[['mercimek',200,'1 cup red lentils (200 g)'],['sogan',100,'1 medium onion (100 g)'],['havuc',100,'1 medium carrot (100 g)'],['patates',150,'1 medium potato (150 g)'],['zeytinyagi',30,'2 tablespoons olive oil (30 ml)']],
+['Rinse the lentils under cold water until it runs clear, then drain. Dice the onion, carrot and potato into small cubes.','Heat the olive oil in a pot and sauté the onion for 3-4 minutes until soft and pink. Add the carrot and potato and stir for 2 minutes.','Add the lentils and 6 cups (1.2 litres) of hot water. Once it boils, lower the heat and cook with the lid slightly open for 25 minutes.','Add 1 dessert spoon of salt and 1 teaspoon of cumin, then blend until smooth. If it is too thick, add hot water. Serve with a squeeze of lemon if you like.'],
+'6 cups hot water, 1 dessert spoon salt, 1 teaspoon cumin, half a lemon (optional)','https://www.youtube.com/watch?v=V2wONbfQILw');
+R('Oven chicken with rice pilaf',4,55,'🍗','Oven-baked chicken with vegetables and fluffy rice pilaf.',
+[['tavuk',600,'600 g chicken breast (about 3 pieces)'],['sebze',300,'300 g mixed vegetables (about 2 cups)'],['pirinc',200,'1 cup rice (200 g)'],['zeytinyagi',45,'3 tablespoons olive oil (45 ml)']],
+['Preheat the oven to 200 °C. Rub the chicken with 2 tablespoons of olive oil, 1 teaspoon of salt and half a teaspoon of black pepper.','Place the chicken and vegetables on a tray lined with baking paper. Bake for 30-35 minutes, until the chicken is no longer pink inside.','Rinse the rice and soak it in warm water for 10 minutes, then drain. Toast it in 1 tablespoon of olive oil in a pot for 2 minutes.','Add 1.5 cups of hot water and half a teaspoon of salt. Cook covered on low heat for 12-15 minutes, rest for 10 minutes and serve with the chicken.'],
+'salt, black pepper, 1.5 cups hot water','https://www.youtube.com/watch?v=hdlptEe_kfU');
+R('Vegetable omelette',2,15,'🍳','A quick, filling omelette with vegetables and cheese.',
+[['yumurta',4,'4 eggs'],['sebze',150,'150 g mixed vegetables (1 cup)'],['peynir',60,'60 g white cheese (4 tablespoons, mashed)'],['zeytinyagi',15,'1 tablespoon olive oil (15 ml)']],
+['Sauté the vegetables (thawed if frozen) in olive oil in a pan for 4-5 minutes, until their water has evaporated.','Beat the eggs in a bowl and add half a teaspoon of salt and a pinch of black pepper.','Pour the eggs over the vegetables and cook covered on low heat for 4-5 minutes.','Sprinkle the cheese on top and cook for 1 more minute, fold in half and serve hot.'],
+'half a teaspoon salt, black pepper','https://www.youtube.com/watch?v=musZ31HURws');
+R('Borlotti beans in olive oil',4,45,'🫘','A classic olive oil dish served cold.',
+[['barbunya',200,'200 g dried borlotti beans (soaked overnight, about 2 cups cooked)'],['sogan',100,'1 medium onion (100 g)'],['havuc',100,'1 medium carrot (100 g)'],['domates',200,'2 medium tomatoes (200 g)'],['zeytinyagi',45,'3 tablespoons olive oil (45 ml)']],
+['Drain the soaked beans and boil them in fresh water for 30-40 minutes until tender, then drain.','Slice the onion into half moons and the carrot into half rounds. Grate the tomatoes.','Sauté the onion in olive oil for 4 minutes and the carrot for 2 minutes. Add the tomatoes and cook for 5 minutes.','Add the beans, 1 cup of hot water, 1 teaspoon of salt and 1 dessert spoon of sugar. Simmer on low heat for 15 minutes and serve once cooled.'],
+'1 cup hot water, 1 teaspoon salt, 1 dessert spoon sugar','https://www.youtube.com/watch?v=VX8QKK7w9XA');
+R('Rice pilaf with chickpeas',4,60,'🍚','Rice pilaf made more filling with chickpeas.',
+[['nohut',150,'150 g dried chickpeas (soaked overnight, about 1.5 cups cooked)'],['pirinc',200,'1 cup rice (200 g)'],['zeytinyagi',30,'2 tablespoons olive oil (30 ml)']],
+['Boil the soaked chickpeas for 40-45 minutes until tender; when draining, keep 1.5 cups of the cooking water.','Rinse the rice and soak it in warm water for 10 minutes, then drain.','Toast the rice in olive oil in a pot for 2 minutes. Add the chickpeas, the hot cooking water you kept and 1 teaspoon of salt.','Cook covered on low heat for 12-15 minutes; rest for 10 minutes and serve.'],
+'1 teaspoon salt','https://www.youtube.com/watch?v=t1U8hUNDg4M');
+R('Cheese pasta',3,20,'🍝','A quick pasta with very few ingredients.',
+[['makarna',250,'250 g pasta (must be gluten-free)'],['peynir',100,'100 g white cheese (1 cup crumbled)'],['zeytinyagi',15,'1 tablespoon olive oil (15 ml)']],
+['Bring 2 litres of water to a boil in a large pot and add 1 dessert spoon of salt.','Cook the pasta according to the packet time (gluten-free pasta usually takes 8-10 minutes) and drain.','Heat the olive oil in a pan and toss the pasta for 1 minute.','Add the crumbled cheese and stir; serve hot once the cheese softens.'],
+'2 litres water, 1 dessert spoon salt, black pepper (optional)','https://www.youtube.com/watch?v=ZHVGxSTZBUg');
+R('Vegetable pasta',3,25,'🥦','Pasta with vegetables sautéed in olive oil.',
+[['makarna',250,'250 g pasta (must be gluten-free)'],['sebze',300,'300 g mixed vegetables (about 2 cups)'],['zeytinyagi',30,'2 tablespoons olive oil (30 ml)']],
+['Cook the pasta in 2 litres of salted water according to the packet time and drain.','Sauté the vegetables in olive oil in a pan for 6-8 minutes until tender. Add half a teaspoon of salt and black pepper.','Add the pasta to the vegetables, toss for 2 minutes and serve.'],
+'2 litres water, 1 dessert spoon salt, black pepper','https://www.youtube.com/watch?v=oIgxLno3LnY&t=13s');
+R('Chicken and rice with yogurt',4,45,'🥣','Boiled chicken, rice pilaf and cold yogurt.',
+[['tavuk',400,'400 g chicken breast (about 2 pieces)'],['yogurt',300,'1.5 cups yogurt (300 g)'],['pirinc',200,'1 cup rice (200 g)']],
+['Boil the chicken in 4 cups of boiling water with 1 teaspoon of salt for 20 minutes; keep 1.5 cups of the broth. Shred the chicken.','Rinse the rice and soak it in warm water for 10 minutes. Cook it covered on low heat in the kept broth for 12-15 minutes; rest for 10 minutes.','Whisk the yogurt with a fork and mix in a pinch of salt.','Put the rice on a plate, top with the chicken and yogurt, and serve.'],
+'4 cups water, 1 teaspoon salt','https://www.youtube.com/watch?v=h_tz3gYfmTc');
+R('Oven potatoes and chicken',4,60,'🥔','Chicken with potatoes and onions, all on one tray.',
+[['tavuk',600,'600 g chicken breast (about 3 pieces)'],['patates',600,'4 medium potatoes (600 g)'],['sogan',150,'1 large onion (150 g)'],['zeytinyagi',45,'3 tablespoons olive oil (45 ml)']],
+['Preheat the oven to 200 °C. Cut the potatoes into large cubes and the onion into half moons.','Toss the chicken and vegetables on a tray with 3 tablespoons of olive oil, 1.5 teaspoons of salt and half a teaspoon of black pepper.','Bake covered with foil for the first 25 minutes, then uncover and bake 25-30 more minutes. The chicken must not be pink inside.'],
+'1.5 teaspoons salt, half a teaspoon black pepper','https://www.youtube.com/watch?v=iYWls562iLM');
+R('Chickpeas with carrots',4,70,'🥕','Chickpeas with carrots in tomato and olive oil.',
+[['nohut',200,'200 g dried chickpeas (soaked overnight)'],['havuc',200,'2 medium carrots (200 g)'],['sogan',100,'1 medium onion (100 g)'],['domates',200,'2 medium tomatoes (200 g)'],['zeytinyagi',45,'3 tablespoons olive oil (45 ml)']],
+['Boil the soaked chickpeas for 40-45 minutes and drain.','Sauté the finely chopped onion in olive oil for 4 minutes; add the carrots and stir for 3 minutes.','Add the grated tomatoes and cook for 5 minutes.','Add the chickpeas, 1.5 cups of hot water and 1 teaspoon of salt; simmer on low heat for 15 minutes.'],
+'1.5 cups hot water, 1 teaspoon salt','https://www.youtube.com/watch?v=UL7mDi4I6ZA');
+R('Menemen (Turkish scrambled eggs)',2,20,'🍅','Menemen with tomatoes, with a soft texture.',
+[['yumurta',4,'4 eggs'],['domates',300,'3 medium tomatoes (300 g)'],['sogan',50,'half a medium onion (50 g)'],['zeytinyagi',30,'2 tablespoons olive oil (30 ml)']],
+['Finely chop the onion and sauté it in olive oil for 3 minutes.','Add the diced tomatoes and cook for 8-10 minutes until their water is absorbed. Add half a teaspoon of salt.','Crack in the eggs and stir lightly; cook on low heat for 3-4 minutes, until it reaches your preferred consistency.'],
+'half a teaspoon salt','https://www.youtube.com/watch?v=767O8uAUHlU');
+R('Lentil rice pilaf',4,35,'🍛','Onion pilaf enriched with lentils.',
+[['mercimek',100,'half a cup red lentils (100 g)'],['pirinc',200,'1 cup rice (200 g)'],['sogan',100,'1 medium onion (100 g)'],['zeytinyagi',30,'2 tablespoons olive oil (30 ml)']],
+['Rinse the lentils and the rice separately; soak the rice in warm water for 10 minutes and drain.','Dice the onion and sauté it in olive oil for 4 minutes.','Add the lentils and stir for 1 minute, then add the rice and toast for 2 more minutes.','Add 2.5 cups of hot water and 1 teaspoon of salt. Cook covered on low heat for 15 minutes, then rest for 10 minutes.'],
+'2.5 cups hot water, 1 teaspoon salt','https://www.youtube.com/watch?v=0s97l4BZvc4');
+// VIDEOS: in the id field you can write a YouTube link or the 11-character video ID.
+const VIDEOS=[{id:'https://www.youtube.com/watch?v=yiNTqUU-h6w&t=6s',t:'Avoiding cross-contamination',d:'Safe preparation in the kitchen'},{id:'https://youtu.be/R-o-83k8dP0?si=bOJaBMtltsBi4H5Y',t:'How to read a product label',d:'Hidden sources of gluten'},{id:'https://youtu.be/F3nw8P-Te64?si=mjJV5USr2CGRbS2R',t:'Setting up a gluten-free kitchen',d:'Keeping things separate in a shared kitchen'},{id:'https://youtu.be/EZdi3J3ARaQ?si=i7HnQb3YVHxObYW8',t:'Weekly menu preparation',d:'Practical planning'},{id:'https://youtu.be/Qq095oo7qqw?si=G_YhLu6QeEmkTtoA',t:'What is celiac disease?',d:'Symptoms and the diagnosis process'},{id:'https://www.youtube.com/watch?v=NHl-xwiEGSQ',t:'Celiac disease in children',d:'A guide for families'},{id:'https://www.youtube.com/watch?v=t2ozT7vvAEk',t:'Gluten-free shopping tips',d:'Choosing right at the supermarket'},{id:'https://www.youtube.com/watch?v=XLA8BYnx5io',t:'Eating out safely',d:'Gluten-free eating in restaurants and while travelling'}];
+const yt=s=>{s=String(s||'');const m=s.match(/(?:youtu\.be\/|[?&]v=|embed\/|shorts\/)([\w-]{11})/)||s.match(/^([\w-]{11})$/);return m?m[1]:''};
+const ytT=s=>{const m=String(s||'').match(/[?&#]t=(\d+)/);return m?m[1]:0};
+const DAY=['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'],LB={ok:'Suitable (sample data)',warn:'Insufficient info',no:'Not suitable',home:'At home'},RK={ok:0,warn:1,no:2};
+// ===== STATE =====
+const $=s=>document.querySelector(s),esc=t=>String(t).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let S=(()=>{try{const x=JSON.parse(localStorage.getItem('gs2'));if(x&&x.plan&&x.plan.length==7&&x.plan.every(i=>i==null||RC[i]))return Object.assign(x,{man:x.man||[],openR:null,vid:null,q:'',f:'all'})}catch(e){}return{members:[{n:'Efe',c:1,l:1}],budget:1500,pantry:[],plan:Array(7).fill(null),sel:{},chk:{},man:[],tab:'home',openR:null,vid:null,q:'',f:'all'}})();
+const save=()=>{try{localStorage.setItem('gs2',JSON.stringify(S))}catch(e){toast('Data could not be saved')}};
+const req=()=>({g:S.members.some(m=>m.c),l:S.members.some(m=>m.l)});
+// Cross-contamination risk and missing information are not treated as safe.
+function st(p){const r=req(),g=P[p][2],l=P[p][3],x=P[p][5];if(r.g&&(g=='c'||x=='rg')||r.l&&(l=='c'||x=='rl'))return'no';if(r.g&&g=='u'||r.l&&l=='u')return'warn';return'ok'}
+const xt=p=>({rg:'May contain traces of gluten',rl:'May contain traces of milk'})[P[p][5]]||'No cross-contamination info';
+const ids=k=>P.map((_,i)=>i).filter(i=>P[i][0]==k);
+function best(k){const a=ids(k);if(S.sel[k]!=null&&a.includes(S.sel[k]))return S.sel[k];return a.sort((x,y)=>RK[st(x)]-RK[st(y)]||P[x][4]-P[y][4])[0]}
+const ingSt=k=>S.pantry.includes(k)?'home':st(best(k));
+const recSt=i=>RC[i][1].map(ingSt).map(x=>x=='home'?'ok':x).sort((a,b)=>RK[b]-RK[a])[0];
+const okR=()=>RC.map((_,i)=>i).filter(i=>recSt(i)=='ok');
+const tag=s=>`<span class="tag ${s}">${LB[s]}</span>`;
+const hasPlan=()=>S.plan.some(x=>x!=null);
+const listItems=()=>{const a=[];S.plan.forEach(i=>i!=null&&RC[i][1].forEach(k=>{if(!S.pantry.includes(k)&&!a.includes(k))a.push(k)}));return a};
+// Amount = recipe amount × (household size / recipe servings); rounded up to whole packs.
+const need=k=>{let q=0;S.plan.forEach(i=>{if(i==null)return;const a=RC[i][5].find(x=>x[0]==k);if(a)q+=a[1]*S.members.length/RC[i][4]});return q};
+const pk=k=>Math.max(1,Math.ceil(need(k)/PK[k][0]-1e-9));
+const cost=k=>pk(k)*P[best(k)][4];
+const manT=()=>S.man.reduce((a,m)=>a+m.p,0);
+const total=()=>listItems().reduce((a,k)=>a+cost(k),0)+manT();
+const spent=()=>listItems().filter(k=>S.chk[k]).reduce((a,k)=>a+cost(k),0)+S.man.filter(m=>m.c).reduce((a,m)=>a+m.p,0);
+const tile=i=>{const h=140+i*22,im=RC[i][9];return `<div class="tile" style="background:${im?`center/cover url('${esc(im)}'),`:''}linear-gradient(135deg,hsl(${h} 38% 88%),hsl(${h+25} 42% 76%))">${im?'':RC[i][10]}</div>`};
+function toast(t){const e=document.createElement('div');e.className='toast';e.textContent=t;document.body.appendChild(e);setTimeout(()=>e.remove(),2600)}
+// ===== ACTIONS =====
+function reset(){S.plan=Array(7).fill(null);S.sel={};S.chk={}}
+// When a product/ingredient choice changes, unsafe days are removed from the plan.
+function san(){let n=0;S.plan=S.plan.map(i=>{if(i!=null&&recSt(i)!='ok'){n++;return null}return i});if(n)toast(n+' day(s) removed from the plan because they are no longer safe')}
+function gen(){const o=okR(),sc=i=>RC[i][1].filter(k=>S.pantry.includes(k)).length+Math.random()*1.5;o.sort((a,b)=>sc(b)-sc(a));if(!o.length){toast('No suitable recipe for this household');return}S.plan=Array.from({length:7},(_,d)=>o[d%o.length]);S.chk={};save();tab('plan');toast(o.length<7?'Some meals repeat because there are few suitable recipes':total()>S.budget?'Warning: the plan exceeds the budget':'Weekly plan ready')}
+function swap(d){let o=okR().filter(i=>!S.plan.includes(i));if(!o.length)o=okR().filter(i=>i!=S.plan[d]);if(o.length){S.plan[d]=o[Math.floor(Math.random()*o.length)];save();draw()}}
+function del(d){S.plan[d]=null;save();draw()}
+function tab(t){S.tab=t;S.openR=null;S.vid=null;save();draw();scrollTo(0,0)}
+function addM(){const n=$('#nn').value.trim();if(!n){toast('Enter a member name');return}S.members.push({n:n.slice(0,20),c:$('#nc').checked?1:0,l:$('#nl').checked?1:0});reset();save();draw()}
+function tm(i,f){S.members[i][f]=S.members[i][f]?0:1;reset();save();draw()}
+function rm(i){if(S.members.length<2)return;S.members.splice(i,1);reset();save();draw()}
+function bud(v){S.budget=Math.max(0,Number(v)||0);save();draw()}
+function pan(k){const i=S.pantry.indexOf(k);i<0?S.pantry.push(k):S.pantry.splice(i,1);S.plan=Array(7).fill(null);S.chk={};save();draw()}
+function pick(k,v){S.sel[k]=Number(v);san();save();draw()}
+function chk(k){S.chk[k]=!S.chk[k];save();draw()}
+function madd(){const n=$('#mn').value.trim(),p=Number($('#mp').value);if(!n||!(p>=0)||$('#mp').value===''){toast('Enter a product name and a valid price');return}S.man.push({n:n.slice(0,40),p:Math.round(p*100)/100,c:0});save();draw()}
+function mchk(i){S.man[i].c=S.man[i].c?0:1;save();draw()}
+function mdel(i){S.man.splice(i,1);save();draw()}
+function openR(i){S.openR=i;draw()}
+function openV(i){S.vid=i;draw()}
+function cls(){S.openR=null;S.vid=null;draw()}
+function addDay(){if(recSt(S.openR)!='ok'){toast('This recipe is not safe for the household and cannot be added to the plan');return}const d=Number($('#ad').value);S.plan[d]=S.openR;save();S.openR=null;toast('Added to '+DAY[d]);draw()}
+function fl(){const e=$('#rl');if(e)e.innerHTML=rlist()}
+document.addEventListener('keydown',e=>{if(e.key=='Escape')cls()});
+// ===== SCREENS =====
+function vHome(){const L=listItems(),tot=total(),pc=S.budget?Math.round(tot/S.budget*100):0,C=2*Math.PI*38,off=C*(1-Math.min(1,pc/100)),td=(new Date().getDay()+6)%7,tr=S.plan[td],r=req(),rs=[r.g&&'Celiac (Gluten)',r.l&&'Lactose'].filter(Boolean);
+return `<div class="grid">
+<div class="card hero in" style="--i:0"><div><h2>Hello</h2><p class="sub" style="max-width:420px;margin:6px 0 0">${hasPlan()?'Your weekly plan is ready. Take a look at today\'s menu and your shopping list.':'Set up your household and we will create a suitable weekly plan together.'}</p></div><button class="p" onclick="${hasPlan()?"tab('plan')":'gen()'}">${hasPlan()?'Open plan':'Create plan'}</button></div>
+<div class="card in" style="--i:1"><div class="sub">Today · ${DAY[td]}</div>${tr!=null?`<h3 style="margin:6px 0 10px">${esc(RC[tr][0])}</h3><div class="r">${tag(recSt(tr))}<button class="s" onclick="openR(${tr})">Recipe</button></div>`:'<p style="margin:8px 0 12px;color:var(--m)">No recipe selected for today.</p><button class="s" onclick="tab(\'tarif\')">Pick a recipe</button>'}</div>
+<div class="card in r" style="--i:2"><div><div class="sub">Weekly budget</div><h3 style="margin:6px 0">₺${tot} / ₺${S.budget}</h3><div class="sub">${L.length||S.man.length?`${pc}% used`:'List is empty'}</div></div><svg class="ring" width="92" height="92" viewBox="0 0 92 92" role="img" aria-label="Budget used ${pc}%"><circle class="bg" cx="46" cy="46" r="38"/><circle class="fg" cx="46" cy="46" r="38" stroke-dasharray="${C}" stroke-dashoffset="${off}" ${pc>100?'style="stroke:#B3341F"':''}/></svg></div>
+<div class="card in" style="--i:3"><div class="sub">Household</div><h3 style="margin:6px 0">${S.members.length} ${S.members.length==1?'person':'people'}</h3><div class="sub">Restrictions: ${rs.length?rs.join(', '):'none'} · Suitable recipes: ${okR().length}/${RC.length}</div><button class="s" style="margin-top:10px" onclick="tab('hane')">Edit</button></div>
+</div><div class="r" style="margin-top:30px"><h2>Recommended videos</h2><button class="s" onclick="tab('video')">All</button></div><div class="grid">${VIDEOS.slice(0,3).map((v,i)=>vcard(v,i,i)).join('')}</div>`}
+function rlist(){const q=S.q.trim().toLowerCase(),a=RC.map((_,i)=>i).filter(i=>RC[i][0].toLowerCase().includes(q)&&(S.f=='all'||(S.f=='ok'&&recSt(i)=='ok')||(S.f=='pan'&&RC[i][1].some(k=>S.pantry.includes(k)))));
+return a.length?a.map((i,n)=>`<div class="card lift in" style="--i:${n}" onclick="openR(${i})" tabindex="0" onkeydown="if(event.key=='Enter')openR(${i})">${tile(i)}<h3>${esc(RC[i][0])}</h3><div class="r" style="margin-top:8px"><span class="sub">${RC[i][3]} min · for ${RC[i][4]}</span>${tag(recSt(i))}</div></div>`).join(''):'<p class="sub">No matching recipes.</p>'}
+function vTarif(){const F=[['all','All'],['ok','Suitable for my household'],['pan','With what I have at home']];return `<h2>Recipes</h2><p class="sub">Labels change depending on your household profile and the selected products.</p><div style="margin:16px 0 4px"><input type="search" placeholder="Search recipes" aria-label="Search recipes" value="${esc(S.q)}" oninput="S.q=this.value;fl()"></div><div>${F.map(f=>`<button class="chip ${S.f==f[0]?'on':''}" onclick="S.f='${f[0]}';draw()">${f[1]}</button>`).join('')}</div><div class="grid" id="rl">${rlist()}</div>`}
+function vPlan(){const o=okR().length;if(!hasPlan())return `<h2>Weekly plan</h2><div class="card" style="margin-top:18px;text-align:center;padding:36px"><p style="color:var(--m)">${o?'No plan has been created yet.':'No recipe suitable for this household profile was found.'}</p>${o?'<button class="p" style="margin-top:12px" onclick="gen()">Create plan</button>':''}</div>`;
+const td=(new Date().getDay()+6)%7;return `<div class="r"><h2>Weekly plan</h2><button class="s" onclick="gen()">Regenerate</button></div><p class="sub">Recipes with products that have insufficient information or are not suitable are not added to the plan.</p><div class="grid">${S.plan.map((i,d)=>`<div class="card in" style="--i:${d};${d==td?'border-color:var(--b);border-width:2px':''}"><div class="sub">${DAY[d]}${d==td?' · Today':''}</div>${i==null?'<p style="margin:8px 0 12px;color:var(--m)">Empty</p><button class="s" onclick="tab(\'tarif\')">Add recipe</button>':`<h3 style="margin:6px 0 10px">${RC[i][10]} ${esc(RC[i][0])}</h3><div class="r">${tag(recSt(i))}<span class="sub">${RC[i][3]} min</span></div><div style="margin-top:12px;display:flex;gap:6px;flex-wrap:wrap"><button class="s" onclick="openR(${i})">Recipe</button><button class="s" onclick="swap(${d})">Swap</button><button class="s" onclick="del(${d})">Remove</button></div>`}</div>`).join('')}</div>`}
+const alt=k=>{const b=best(k);return ids(k).filter(p=>P[p][4]<P[b][4]&&st(p)!='no'&&RK[st(p)]<=RK[st(b)]).sort((x,y)=>P[x][4]-P[y][4])[0]};
+function vListe(){const L=listItems(),tot=total(),pc=S.budget?Math.round(tot/S.budget*100):0,over=tot>S.budget,sp=spent();
+const items=L.length?`<div class="grid">${L.map((k,n)=>{const b=best(k),a=alt(k);return `<div class="card in" style="--i:${n}"><div class="r"><label class="c" style="margin:0"><input type="checkbox" ${S.chk[k]?'checked':''} onchange="chk('${k}')"><span style="${S.chk[k]?'text-decoration:line-through;color:#8a9a91':''}">${ING[k]}</span></label><b>₺${cost(k)}</b></div><div class="sub">Needed: ${Math.round(need(k))} ${PK[k][1]} · ${pk(k)} ${pk(k)==1?'pack':'packs'} (${PK[k][0]} ${PK[k][1]})</div><div class="r" style="margin-top:6px"><span class="sub">${P[b][1]}</span>${tag(st(b))}</div>${a!=null?`<div class="r" style="margin-top:8px"><span class="sub">Cheaper option: ${P[a][1]} · ₺${P[a][4]}</span><button class="s" onclick="pick('${k}',${a})">Choose</button></div>`:''}</div>`}).join('')}</div>`:'<div class="card" style="margin-top:18px;text-align:center;padding:30px;color:var(--m)">Ingredients from the plan will appear here once a weekly plan is created.</div>';
+return `<h2>Shopping list</h2><div class="card in" style="margin:18px 0"><div class="r"><span class="sub">Estimated total / budget</span><b>₺${tot} / ₺${S.budget}</b></div><div class="bar ${over?'over':''}" style="margin-top:10px"><i style="width:${Math.min(100,pc)}%"></i></div><div class="sub" style="margin-top:8px">${over?`⚠ Over budget by ₺${tot-S.budget}. You can pick cheaper products below.`:`${pc}% of the budget used, ₺${S.budget-tot} left.`}</div><div class="sub" style="margin-top:4px">Bought: ₺${sp} · To buy: ₺${tot-sp}</div></div>${items}
+<h2 style="margin-top:28px">My added products</h2><div class="grid">${S.man.map((m,i)=>`<div class="card"><div class="r"><label class="c" style="margin:0"><input type="checkbox" ${m.c?'checked':''} onchange="mchk(${i})"><span style="${m.c?'text-decoration:line-through;color:#8a9a91':''}">${esc(m.n)}</span></label><b>₺${m.p}</b></div><button class="s" style="margin-top:8px" onclick="mdel(${i})">Delete</button></div>`).join('')}<div class="card"><input id="mn" type="text" maxlength="40" placeholder="Product name" aria-label="Product name"><input id="mp" type="number" min="0" step="0.5" placeholder="Price (₺)" aria-label="Price" style="margin:8px 0"><button class="p" onclick="madd()">Add to list</button></div></div><p class="sub" style="margin-top:14px">Amounts scale with household size and are rounded up to whole packs. Prices are samples.</p>`}
+function vcard(v,i,n){const id=yt(v.id),ok=!!id;return `<div class="card lift in" style="--i:${n}" ${ok?`onclick="openV(${i})" tabindex="0" onkeydown="if(event.key=='Enter')openV(${i})"`:''}>${ok?`<div class="vt" style="background-image:url(https://i.ytimg.com/vi/${id}/hqdefault.jpg)"></div>`:'<div class="ph">Video to be added<br>(write the YouTube ID in the VIDEOS list in the code)</div><div style="height:10px"></div>'}<h3>${esc(v.t)}</h3><div class="sub">${esc(v.d)}</div></div>`}
+function vVideo(){return `<h2>Videos</h2><p class="sub">Selected videos about celiac disease and gluten-free living. Click to play them here.</p><div class="grid">${VIDEOS.map((v,i)=>vcard(v,i,i)).join('')}</div>`}
+function vHane(){const r=req(),rs=[r.g&&'Celiac (Gluten)',r.l&&'Lactose'].filter(Boolean);
+return `<h2>Household</h2><p class="sub">Restrictions applied: <b>${rs.length?rs.join(', '):'none'}</b>. The plan is reset when the profile changes.</p><div class="grid">${S.members.map((m,i)=>`<div class="card in" style="--i:${i}"><div class="r"><b>${esc(m.n)}</b><button class="x" aria-label="Delete member ${esc(m.n)}" onclick="rm(${i})">×</button></div><button class="chip ${m.c?'on':''}" onclick="tm(${i},'c')">Celiac (Gluten)</button><button class="chip ${m.l?'on':''}" onclick="tm(${i},'l')">Lactose</button></div>`).join('')}
+<div class="card in" style="--i:${S.members.length}"><input id="nn" type="text" placeholder="New member name" aria-label="New member name"><div><label class="c"><input id="nc" type="checkbox">Celiac (Gluten)</label><label class="c"><input id="nl" type="checkbox">Lactose</label></div><button class="p" onclick="addM()">Add member</button></div></div>
+<h2 style="margin-top:28px">Weekly budget (₺)</h2><div style="max-width:240px;margin-top:8px"><input type="number" min="0" value="${S.budget}" aria-label="Weekly budget" onchange="bud(this.value)"></div>
+<h2 style="margin-top:28px">Ingredients at home</h2><p class="sub">Selected items are not added to the list; the plan prioritises them.</p><div style="margin-top:8px">${Object.keys(ING).map(k=>`<button class="chip ${S.pantry.includes(k)?'on':''}" onclick="pan('${k}')">${ING[k]}</button>`).join('')}</div>`}
+function sheetR(){const i=S.openR,r=RC[i],id=yt(r[8]),t0=ytT(r[8]);return `<div class="sheet" onclick="if(event.target===this)cls()"><div role="dialog" aria-label="${esc(r[0])}">${tile(i)}<div class="r"><h2 style="margin:0">${esc(r[0])}</h2><button class="x" aria-label="Close" onclick="cls()">×</button></div><div class="r" style="margin:6px 0 12px"><span class="sub">${r[3]} min · for ${r[4]}</span>${tag(recSt(i))}</div><p style="margin:0 0 14px">${esc(r[2])}</p>
+<div class="note">Product information is sample data and not a real product verification. Always check the package label before buying.</div>
+<h3 style="margin-bottom:8px">Ingredients (for ${r[4]})</h3>${r[5].map(a=>{const k=a[0],b=best(k);return `<div class="box"><div class="r"><b>${ING[k]}</b>${tag(ingSt(k))}</div><div style="font-size:14px;margin-top:2px">${esc(a[2])}</div>${S.pantry.includes(k)?'<div class="info">At home. Still check the label.</div>':`<select aria-label="${ING[k]} product" onchange="pick('${k}',this.value)" style="margin-top:8px">${ids(k).map(p=>`<option value="${p}" ${p==b?'selected':''}>${P[p][1]} · ₺${P[p][4]} · ${LB[st(p)]}</option>`).join('')}</select><div class="info">Ingredients: ${esc(P[b][6])} · ${xt(b)}<br>${SRC}</div>`}</div>`}).join('')}
+<div class="box"><b>Extra ingredients</b><div class="sub">${esc(r[7])}. For spices and sauces, check the label for gluten/lactose.</div></div>
+<h3 style="margin:16px 0 4px">Method</h3><ol class="st">${r[6].map(s=>`<li>${esc(s)}</li>`).join('')}</ol>
+<h3 style="margin-bottom:8px">Recipe video</h3>${id?`<iframe class="vf" loading="lazy" src="https://www.youtube-nocookie.com/embed/${id}?rel=0${t0?'&start='+t0:''}" title="${esc(r[0])} video" allow="encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe>`:'<div class="ph">Video to be added<br>(write the YouTube link in the video field of this recipe\'s R(...) line in the code)</div>'}
+<div class="r" style="gap:10px;margin-top:16px"><select id="ad" aria-label="Choose day">${DAY.map((d,n)=>`<option value="${n}">${d}</option>`).join('')}</select><button class="p" style="white-space:nowrap" onclick="addDay()">Add to plan</button></div></div></div>`}
+function sheetV(){const v=VIDEOS[S.vid],id=yt(v.id),t0=ytT(v.id);return `<div class="sheet" onclick="if(event.target===this)cls()"><div role="dialog" aria-label="${esc(v.t)}"><div class="r" style="margin-bottom:12px"><h3>${esc(v.t)}</h3><button class="x" aria-label="Close" onclick="cls()">×</button></div><iframe class="vf" src="https://www.youtube-nocookie.com/embed/${id}?rel=0&autoplay=1${t0?'&start='+t0:''}" title="${esc(v.t)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen referrerpolicy="strict-origin-when-cross-origin"></iframe><p class="sub" style="margin-top:10px">${esc(v.d)}</p></div></div>`}
+function draw(){['home','tarif','plan','liste','video','hane'].forEach(t=>{const b=$('#t-'+t);b.className=S.tab==t?'on':'';S.tab==t?b.setAttribute('aria-current','page'):b.removeAttribute('aria-current')});
+const o=$('#m .sheet>div'),y=o?o.scrollTop:0;
+const v=$('#v');v.className='';void v.offsetWidth;v.className='view';v.innerHTML=({home:vHome,tarif:vTarif,plan:vPlan,liste:vListe,video:vVideo,hane:vHane})[S.tab]();
+$('#m').innerHTML=S.openR!=null?sheetR():(S.vid!=null&&yt(VIDEOS[S.vid].id)?sheetV():'');
+const n=$('#m .sheet>div');if(n&&y)n.scrollTop=y}
+draw();
+</script>
+</body>
+</html>
